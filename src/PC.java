@@ -27,18 +27,21 @@ public class PC {
 		try{
                         File f = new File("cle.txt");
                         System.out.println("Fichier clé crée");
-                        //on genere une cle
+                        //on genere une cle grâce a Key generator en utilisant AES
                         KeyGenerator generatorkey = KeyGenerator.getInstance("AES");
                         generatorkey.init(128);
                         SecretKey cle = generatorkey.generateKey();
                         byte[] ByteKey = cle.getEncoded();
                         String finalKey = Base64.encode(ByteKey);
+                        //On inscrit la clé générée dans le fichier cle.txt
                         FileWriter writer = new FileWriter(f.getAbsoluteFile());
                         BufferedWriter buff = new BufferedWriter(writer);
                         buff.write(finalKey);
+                        //On affiche la clé
                         System.out.println("Notre clé est : " + finalKey);
-                        writer.close();
                         buff.close();
+                        writer.close();
+                        
                         server = new ServerSocket(4444, 5);//5 connexions clientes au plus
 			go();
 		}catch(Exception e){}
