@@ -93,6 +93,8 @@ public class ChatServer implements Runnable {
                         cipher.init(Cipher.ENCRYPT_MODE, key);
                         byte[] messageByte = cipher.doFinal(input.getBytes("UTF-8"));
                         String messageEncode = Base64.encode(messageByte);
+                        System.out.println("Message crypté");
+
                         // on envoie le message crypté
                         out.println(messageEncode);
                         out.flush();

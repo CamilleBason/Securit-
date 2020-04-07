@@ -99,7 +99,10 @@ public class PB {
                         //l'utilisateur peut repondre
                         System.out.print("enter msg> ");
                         userInput = k.nextLine();
-                        out.println( userInput);
+                        cipher.init(Cipher.ENCRYPT_MODE,key);
+                        byte[] messageByte = cipher.doFinal(userInput.getBytes());
+                        String messageCode = Base64.encode(messageByte);                        
+                        out.println( messageCode);
                         out.flush();
                         if (userInput.compareToIgnoreCase("bye") == 0) {
                             System.out.println("shutting down");
